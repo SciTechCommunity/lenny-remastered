@@ -1,0 +1,72 @@
+#ifndef GLOBALS_HXX
+#define GLOBALS_HXX
+
+#include <QtCore>
+#include <QtCoreDepends>
+#include <QtNetwork>
+#include <QtNetworkDepends>
+#include <QtWebSockets>
+#include <QtWebSocketsDepends>
+
+using qchar = QChar;
+
+namespace qt {
+using core = QCoreApplication;
+using var = QVariant;
+using object = QObject;
+using debug = QDebug;
+using dir = QDir;
+using regex = QRegularExpression;
+using string = QString;
+using iodevice = QIODevice;
+
+using url = QUrl;
+
+using buffer = QBuffer;
+using bits = QBitArray;
+using bytes = QByteArray;
+using stringlist = QStringList;
+
+
+namespace stream {
+using file = QFile;
+using data = QDataStream;
+using text = QTextStream;
+}
+
+namespace time {
+//using uuid            = QUuid;
+//using crypto          = QCryptographicHash;
+using date = QDate;
+using time = QTime;
+using timer = QTimer;
+using basictimer = QBasicTimer;
+using timerevent = QTimerEvent;
+}
+
+namespace net {
+using reply = QNetworkReply;
+using request = QNetworkRequest;
+using manager = QNetworkAccessManager;
+using socket = QAbstractSocket;
+using websocket = QWebSocket;
+using tcpsocket = QTcpSocket;
+using udpsocket = QUdpSocket;
+}
+
+namespace json {
+using doc = QJsonDocument;
+using arr = QJsonArray;
+using obj = QJsonObject;
+using var = QJsonValue;
+}
+template <typename T> using list = QList<T>;
+template <typename T> using array = QVarLengthArray<T>;
+template <typename T> using vector = QVector<T>;
+template <typename K, typename V> using map = QMap<K,V>;
+template <typename A, typename B> using pair = QPair<A,B>;
+template <typename K, typename V> using hash = QHash<K,V>;
+template <typename K, typename V> using cache = QCache<K,V>;
+}
+
+#endif // GLOBALS_HXX
