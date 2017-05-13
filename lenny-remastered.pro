@@ -1,5 +1,4 @@
-QT += core concurrent network websockets script
-QT -= gui
+QT += core gui concurrent network websockets
 
 CONFIG += c++14
 
