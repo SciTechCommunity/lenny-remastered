@@ -16,14 +16,13 @@ float map(float value,
 
 pair<int,string> parseMessage(json::obj data) {
   int i = -1; stringlist s = data["content"].toString().split(' ');
-  if (s.length() < 2) return qMakePair(i, string());
   if (s.takeFirst().compare("!ebooks", Qt::CaseInsensitive) == 0) {
-    if (s.length() == 0) return qMakePair(--i, string());
+    if (s.length() == 0) return qMakePair(i-1, string());
     else if (s.length() > 1 && s.first().toInt() > 0) {
       i = s.takeFirst().toInt();
-      return qMakePair(i, s.join("+"));
-    } else return qMakePair(0, s.join("+"));
-    return qMakePair(true, data["content"].toString().remove(0,8));
+      return qMakePair(i, string(url::toPercentEncoding(s.join("~~~~")).replace("~~~~", "+")));
+    } else return qMakePair(0, string(url::toPercentEncoding(s.join("~~~~")).replace("~~~~", "+")));
+//    return qMakePair(true, data["content"].toString().remove(0,8));
   } else return qMakePair(i, string());
 }
 
@@ -35,7 +34,10 @@ net::reply * query(string s, net::manager * network) {
 }
 
 void sendHelp(Discord & d, json::var ch) {
-  d.sendMessageAs(ch.toVariant().toULongLong(), "Help Menu in Progress.");
+  QFile f("ebooks.md");
+  f.open(iodevice::ReadOnly);
+  d.sendMessageAs(ch.toVariant().toULongLong(), f.readAll());
+  f.close();
 }
 
 list< pair<string,string> > parsePage(string page) {
@@ -106,7 +108,7 @@ int main(int argc, char *argv[])
         } string response =
             string("**%1**  books found matching ***%2*** showing page **%3**")
             .arg(rows.size())
-            .arg(input.second)
+            .arg(url::fromPercentEncoding(input.second.toUtf8()))
             .arg(input.first);
         quint64 channel_id = data["channel_id"].toVariant().toULongLong();
         d.sendMessageAs(channel_id, response, books);

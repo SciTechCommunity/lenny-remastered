@@ -239,10 +239,6 @@ public slots:
          .arg(hook["id"].toString())
         .arg(hook["token"].toString()));
     req.setUrl(newUrl);
-    //    while (embeds.count() > 2) {
-    //      embeds.removeLast();
-    //    } qDebug() << embeds.count();
-    //    embeds = json::arr{json::obj {{"title", "testing"}}, json::obj {{"title", "testing"}}, json::obj {{"title", "testing"}} ,json::obj {{"title", "testing"}},json::obj{{"title", "testing"}}};
     json::obj message {
       {"username", USERNAME},
       {"avatar_url", AVATAR},
